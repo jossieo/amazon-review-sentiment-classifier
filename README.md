@@ -186,6 +186,15 @@ agree largely only on unambiguously worded reviews.
 8. **NRC download link 404** — the expected direct `.txt` URL was gone; the real zip was found
    from the lexicon homepage (`NRC-Emotion-Lexicon.zip`, then extracted with the README/citation
    intact).
+9. **Dashboard review table rendered empty / the filter tabs did nothing** — the row-building
+   code passed the row number to an HTML-escape helper as a *number*, so `(s || "").replace`
+   threw a `TypeError` on the very first row; `render()` aborted, leaving an empty table and
+   making the filter/search/sort controls appear to "do nothing" on every click. **Fix:** made
+   the escape helper coerce any input to a string (`String(s ?? "")`). The page also now
+   hardens the theme store — Chrome blocks `localStorage` on `file://` URLs, so it falls back
+   to an in-memory store instead of throwing. Verified by re-running the page's own script in
+   Node against the saved data (clicking "Rating negative" now yields "Showing 50 of 150
+   reviews (filtered)") and by a headless-browser render showing all 150 rows.
 
 ---
 
