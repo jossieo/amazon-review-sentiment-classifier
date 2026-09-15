@@ -1,0 +1,151 @@
+idx,asin,rating,truth,llm_sent_full,llm_sent,llm_emotion,parse_ok,title
+0,B00CIECDEM,5.0,POS,POSITIVE,POS,joy,True,Five Stars
+1,B0091JL1I6,5.0,POS,POSITIVE,POS,joy,True,Cute Little Amazon Box
+2,B00IX1I3G6,5.0,POS,NEGATIVE,NEG,anger,True,5% sweet sauce
+3,B00CIECDEM,5.0,POS,POSITIVE,POS,joy,True,Five Stars
+4,B01MSBQB1P,5.0,POS,POSITIVE,POS,joy,True,Five Stars
+5,B0080IR6RY,5.0,POS,POSITIVE,POS,joy,True,Gift card in a tin
+6,B076417B1K,5.0,POS,POSITIVE,POS,joy,True,This is so cute!
+7,B00JJ59UA8,5.0,POS,POSITIVE,POS,joy,True,Good purchase
+8,B086KKT3RX,5.0,POS,POSITIVE,POS,joy,True,Fast & Easy
+9,B00K4PIKQ2,5.0,POS,POSITIVE,POS,joy,True,Five Stars
+10,B00DNAGTIQ,5.0,POS,POSITIVE,POS,joy,True,Gift
+11,B07FKK8SFR,5.0,POS,POSITIVE,POS,joy,True,Great gift card
+12,B00IX1I3G6,5.0,POS,POSITIVE,POS,joy,True,Great!
+13,B072P5VV4D,5.0,POS,POSITIVE,POS,joy,True,how cute these are!!!
+14,B00IX1I3G6,5.0,POS,POSITIVE,POS,joy,True,Five Stars
+15,B01K8RJDEI,5.0,POS,POSITIVE,POS,joy,True,Great gift!
+16,B006PJHPV2,5.0,POS,POSITIVE,POS,joy,True,Five Stars
+17,B005ESMF5G,5.0,POS,POSITIVE,POS,joy,True,Five Stars
+18,B00IX1I3G6,5.0,POS,POSITIVE,POS,joy,True,GREAT
+19,B005ESMGZU,5.0,POS,POSITIVE,POS,joy,True,Five Stars
+20,B00IX1I3G6,5.0,POS,POSITIVE,POS,joy,True,Five Stars
+21,B086KKT3RX,5.0,POS,POSITIVE,POS,joy,True,Great
+22,B077T9WSSN,5.0,POS,POSITIVE,POS,joy,True,Looks Good
+23,B086KKT3RX,5.0,POS,POSITIVE,POS,joy,True,"Money,value for the money!!"
+24,B0078EPRPE,5.0,POS,POSITIVE,POS,joy,True,we love ihop
+25,B00IX1I3G6,5.0,POS,POSITIVE,POS,joy,True,Easy as usual
+26,B014S24B28,5.0,POS,NEUTRAL,NEU,trust,True,just like the description
+27,B077T9WSSN,5.0,POS,POSITIVE,POS,joy,True,Everyone likes Amazon gift card.
+28,B071VCQJ24,5.0,POS,POSITIVE,POS,joy,True,Good
+29,B014LMWGCM,5.0,POS,POSITIVE,POS,joy,True,Five Stars
+30,B00BXLVIWY,5.0,POS,POSITIVE,POS,joy,True,My daughter loves it!
+31,B014S24B28,5.0,POS,POSITIVE,POS,joy,True,Five Stars
+32,B07HFRK4NR,5.0,POS,POSITIVE,POS,joy,True,Movies
+33,B00OR54DES,5.0,POS,POSITIVE,POS,joy,True,Awesome mom or grandma gift
+34,B005ESMGZU,5.0,POS,POSITIVE,POS,joy,True,Great job Amazon
+35,B00IX1I3G6,5.0,POS,POSITIVE,POS,joy,True,Way to split payments if needed
+36,B00FGEHS00,5.0,POS,POSITIVE,POS,trust,True,It's a gift card.
+37,B00IX1I3G6,5.0,POS,POSITIVE,POS,joy,True,Gift Card Reload
+38,B00IX1I3G6,5.0,POS,POSITIVE,POS,joy,True,Great way to save
+39,B071VCQJ24,5.0,POS,POSITIVE,POS,joy,True,Fun chimney gift card and holder
+40,B00IX1I3G6,5.0,POS,POSITIVE,POS,joy,True,Great way to shop
+41,B00F2RZPOM,5.0,POS,POSITIVE,POS,joy,True,Five Stars
+42,B06ZY44YG4,5.0,POS,POSITIVE,POS,joy,True,Great gift idea
+43,B00IX1I3G6,5.0,POS,POSITIVE,POS,joy,True,Love it
+44,B00PG4FAH8,5.0,POS,POSITIVE,POS,joy,True,Five Stars
+45,B07SRDJDYD,5.0,POS,POSITIVE,POS,joy,True,This is the perfect gift
+46,B0725J7VW7,5.0,POS,POSITIVE,POS,joy,True,Great versatile gift!
+47,B00IX1I3G6,5.0,POS,POSITIVE,POS,joy,True,Quick & easy
+48,B00IX1I3G6,5.0,POS,POSITIVE,POS,joy,True,Nice as a gift!
+49,B0725JM87R,5.0,POS,POSITIVE,POS,joy,True,Easy gift for themselves
+50,B0866QM41K,3.0,NEU,NEGATIVE,NEG,sadness,True,"Changing the price to what I wanted, disappointed"
+51,B00IX1I3G6,3.0,NEU,NEUTRAL,NEU,anger,True,Three Stars
+52,B00JJ59UA8,3.0,NEU,NEGATIVE,NEG,anger,True,Hold out until pandemic in the past to eat here.
+53,B07HJHK8Y5,3.0,NEU,NEUTRAL,NEU,disgust,True,Would be 5 stars without activation fee
+54,BT00CTP05K,3.0,NEU,NEGATIVE,NEG,disgust,True,Food Stains?
+55,B01E4QQ6QM,3.0,NEU,NEGATIVE,NEG,anger,True,Arrived quickly (the next day) but I gave it 3 ...
+56,B01K8RJN2A,3.0,NEU,NEGATIVE,NEG,anger,True,Bad Experience
+57,B01LXGGQXW,3.0,NEU,NEGATIVE,NEG,anger,True,The envelope is ripped
+58,B00IX1I3G6,3.0,NEU,POSITIVE,POS,joy,True,Nice
+59,B0747TDN6L,3.0,NEU,NEGATIVE,NEG,sadness,True,Nothing special
+60,B06ZY44YG4,3.0,NEU,NEGATIVE,NEG,anger,True,Box was damaged upon arrival
+61,B07GFQ5B44,3.0,NEU,NEGATIVE,NEG,fear,True,The tab covering the barcode was missing
+62,B001H53QDU,3.0,NEU,NEGATIVE,NEG,disgust,True,Amazon Gift Card
+63,B086KKT3RX,3.0,NEU,NEGATIVE,NEG,anger,True,"Found both website and app difficult follow,"
+64,B01K8RMDO0,3.0,NEU,NEGATIVE,NEG,sadness,True,No amount on card and directions are inaccurate!
+65,B06ZYYYHV3,3.0,NEU,POSITIVE,POS,joy,True,Cute Presentation
+66,B086KKT3RX,3.0,NEU,NEGATIVE,NEG,anger,True,"Good bonus, but"
+67,B0091JKYLQ,3.0,NEU,NEGATIVE,NEG,anger,True,Item arrived crushed
+68,B00BXLW38M,3.0,NEU,NEUTRAL,NEU,trust,True,Three Stars
+69,B015WZDBPS,3.0,NEU,POSITIVE,POS,joy,True,they will purchase good tacos. The gift cards are very plain
+70,B00OOKDO4Q,3.0,NEU,NEGATIVE,NEG,anger,True,Three Stars
+71,B00IX1I3G6,3.0,NEU,POSITIVE,POS,trust,True,Card
+72,B0160LI5T0,3.0,NEU,NEUTRAL,NEU,anger,True,the gift cards came nicely packaged.
+73,B00IX1I3G6,3.0,NEU,NEUTRAL,NEU,anger,True,It's ok
+74,B01N5TMK8I,3.0,NEU,NEGATIVE,NEG,anger,True,Too much for purchase
+75,B07DDDS9R4,3.0,NEU,NEGATIVE,NEG,anger,True,It's a gift card
+76,B06ZY44YG4,3.0,NEU,NEUTRAL,NEU,fear,True,Paper gift card gets stuck in box
+77,B00IX1I3G6,3.0,NEU,NEUTRAL,NEU,trust,True,don’t reload huge amounts
+78,B01K8RL9C2,3.0,NEU,NEGATIVE,NEG,anger,True,wrong house
+79,B00BXLUDXO,3.0,NEU,NEUTRAL,NEU,surprise,True,Three Stars
+80,B08B3NYGBF,3.0,NEU,POSITIVE,POS,joy,True,GREAT
+81,B00IX1I3G6,3.0,NEU,NEUTRAL,NEU,surprise,True,Do we really get a 2% back???
+82,B00IX1I3G6,3.0,NEU,NEGATIVE,NEG,sadness,True,When it works
+83,B0091JKU5Q,3.0,NEU,NEGATIVE,NEG,anger,True,I wrote a message to show who it was from ...
+84,B0091JKU5Q,3.0,NEU,NEGATIVE,NEG,anger,True,did not arrive when scheduled
+85,B06WVJBLBQ,3.0,NEU,NEUTRAL,NEU,trust,True,Needs more
+86,B00IX1I3G6,3.0,NEU,NEGATIVE,NEG,anger,True,Would never do again
+87,B00IX1I3G6,3.0,NEU,NEUTRAL,NEU,surprise,True,giftcard
+88,B01K8RMDO0,3.0,NEU,NEGATIVE,NEG,anger,True,No where to write the Gift Card Value
+89,B005J045DE,3.0,NEU,NEGATIVE,NEG,anger,True,Don't trust the shipping
+90,B00FTGTM5E,3.0,NEU,NEGATIVE,NEG,anger,True,who cannot love Starbucks.
+91,B086KKT3RX,3.0,NEU,NEUTRAL,NEU,disgust,True,works but could be simpler
+92,B07Q41YCPJ,3.0,NEU,NEGATIVE,NEG,anger,True,Different card Received then pictured!
+93,B00IX1I3G6,3.0,NEU,NEGATIVE,NEG,anger,True,Tricky Checkout
+94,B0725J7VW7,3.0,NEU,NEGATIVE,NEG,anger,True,Card did not work....very upset
+95,B00IX1I3G6,3.0,NEU,NEUTRAL,NEU,anger,True,It should be Clearer and Easier to Give money to Amazon
+96,B0160LI5T0,3.0,NEU,NEUTRAL,NEU,surprise,True,Three Stars
+97,B00IX1I3G6,3.0,NEU,NEUTRAL,NEU,anticipation,True,Three Stars
+98,BT00CTP0SM,3.0,NEU,NEUTRAL,NEU,disgust,True,Fairly Nice
+99,B01E4QP6RW,3.0,NEU,NEGATIVE,NEG,sadness,True,Nice presentation for a gift card except for the fact ...
+100,B002Q1QQUY,1.0,NEG,NEGATIVE,NEG,anger,True,Quick delivery of AMC card. DOES NOT ACCEPT AMAZON POINTS
+101,B01MSBQB1P,1.0,NEG,NEGATIVE,NEG,anger,True,DOES NOT WORK.  Don't buy
+102,B07GHDHKPN,1.0,NEG,NEGATIVE,NEG,anger,True,This card sucks
+103,B00IX1I3G6,1.0,NEG,NEGATIVE,NEG,anger,True,Not happy
+104,B0108MGLWU,1.0,NEG,NEGATIVE,NEG,anger,True,Its a scam
+105,B0091JKFG0,1.0,NEG,NEGATIVE,NEG,sadness,True,Unhappy
+106,B0719C5P56,1.0,NEG,NEGATIVE,NEG,anger,True,instruction do not match invoice
+107,B00BXLVD8I,1.0,NEG,NEGATIVE,NEG,anger,True,No longer taken at Pei Wei
+108,B01C9MW8Z6,1.0,NEG,NEGATIVE,NEG,anger,True,you messed up
+109,B01MSBQB1P,1.0,NEG,NEGATIVE,NEG,anger,True,Doesn't appear to work at the pump.
+110,B086KKT3RX,2.0,NEG,NEGATIVE,NEG,anger,True,Why change the behavior without notifying?
+111,B01E4QR5LC,1.0,NEG,NEGATIVE,NEG,anger,True,One Star
+112,B086KKT3RX,1.0,NEG,NEGATIVE,NEG,anger,True,Amazon gift card
+113,B086KKT3RX,2.0,NEG,NEGATIVE,NEG,sadness,True,Thought it was for a gift card :(
+114,B01K8RMDO0,1.0,NEG,NEGATIVE,NEG,anger,True,Damaged box.
+115,B07FX8QBVH,1.0,NEG,NEGATIVE,NEG,anger,True,Very embarrassed and dissatisfied with this product!
+116,B086KKT3RX,1.0,NEG,NEGATIVE,NEG,anger,True,terrible desicion
+117,B01MSBQB1P,1.0,NEG,NEGATIVE,NEG,anger,True,Something's not quite right.
+118,B01MSBQB1P,1.0,NEG,NEGATIVE,NEG,anger,True,You delivered a gift card which is like cash to the wrong address.
+119,B01MSBQB1P,1.0,NEG,NEGATIVE,NEG,anger,True,Defective card
+120,B00IX1I3G6,1.0,NEG,NEGATIVE,NEG,anger,True,SCAM
+121,B00IX1I3G6,1.0,NEG,NEGATIVE,NEG,anger,True,Would use this but NOT with CHASE Bank.
+122,B00IX1I3G6,1.0,NEG,NEGATIVE,NEG,anger,True,Make sure you read all the fine prints. Don’t trust customer representative.
+123,B07Y93PHLP,1.0,NEG,NEGATIVE,NEG,anger,True,No card
+124,B01K8RMDO0,1.0,NEG,NEGATIVE,NEG,anger,True,Not sure whats going on here!
+125,B00IX1I3G6,2.0,NEG,NEGATIVE,NEG,anger,True,I made a selection error but tried to change it ...
+126,B00IX1I3G6,2.0,NEG,NEGATIVE,NEG,surprise,True,Confusing.
+127,B0719C5P56,1.0,NEG,NEGATIVE,NEG,anger,True,Total Screwup
+128,B07GH6WX29,1.0,NEG,NEGATIVE,NEG,anger,True,I got visa gift card i cant use it
+129,B00IX1I3G6,1.0,NEG,NEUTRAL,NEU,trust,True,Thanks
+130,B0080IR72S,1.0,NEG,NEGATIVE,NEG,anger,True,Gift Box Dented / No Gift Message Included
+131,B071VCQJ24,1.0,NEG,NEGATIVE,NEG,sadness,True,Dissatisfied with the results.
+132,B0719C5P56,1.0,NEG,NEGATIVE,NEG,anger,True,STOLEN! By Amazon Driver??
+133,B00X6G8WCI,1.0,NEG,NEGATIVE,NEG,anger,True,Buyer beware!
+134,B07HJD9FVV,1.0,NEG,NEGATIVE,NEG,anger,True,Where's My Money!?!
+135,B077DLFNTW,1.0,NEG,NEGATIVE,NEG,anger,True,Wasted $50
+136,B07MZS4F18,1.0,NEG,NEGATIVE,NEG,anger,True,Important catch Spotify doesn't mention
+137,B00IX1I3G6,1.0,NEG,NEGATIVE,NEG,anger,True,Bonus on reload
+138,B001H53QDK,1.0,NEG,NEGATIVE,NEG,anger,True,GE Amazon card is CROOKED
+139,B07WRT8KQ9,1.0,NEG,NEGATIVE,NEG,anger,True,Impossible to use
+140,B07FMJVVKW,1.0,NEG,NEGATIVE,NEG,anger,True,Damaged Box
+141,B07GH6WX29,1.0,NEG,NEGATIVE,NEG,anger,True,Buy visa instead
+142,B0091JKU5Q,1.0,NEG,NEGATIVE,NEG,anger,True,One Star
+143,B00IX1I3G6,1.0,NEG,NEGATIVE,NEG,sadness,True,Why refund is not avalible
+144,B07GH6WX29,1.0,NEG,NEGATIVE,NEG,anger,True,I got visa gift card i cant use it
+145,B086KKT3RX,1.0,NEG,NEGATIVE,NEG,anger,True,Old way was better
+146,B004H1M6GY,1.0,NEG,POSITIVE,POS,joy,True,I am lucky that I looked at the reviews because ...
+147,B00IX1I3G6,1.0,NEG,NEGATIVE,NEG,anger,True,Problem
+148,B00AS527QW,1.0,NEG,NEGATIVE,NEG,anger,True,"Refusal of Boone,NC Regal theater to redeem $50 in Fandango  gift tickets"
+149,B00IX1I3G6,2.0,NEG,NEGATIVE,NEG,sadness,True,Two Stars

@@ -1,0 +1,101 @@
+idx,rating,title,llm_sent,llm_emotion,nrc_emotion
+0,5.0,Great gift,POSITIVE,joy,anticipation
+1,5.0,amazon gift card,POSITIVE,joy,joy
+2,5.0,perfect gift,POSITIVE,joy,joy
+3,5.0,Nice looking,POSITIVE,joy,anticipation
+4,1.0,Not $10 Gift Cards,NEGATIVE,anger,joy
+5,5.0,Cute!,POSITIVE,joy,joy
+6,5.0,Easy gift,POSITIVE,joy,anticipation
+7,5.0,Great gift,POSITIVE,joy,anticipation
+8,5.0,Gifts for my two granddaughters,POSITIVE,joy,joy
+9,5.0,"Great for saying “thank you” to the mail person, farrier, yard man,etc",POSITIVE,joy,anticipation
+10,5.0,"Convenient, safe, and perfect gift",POSITIVE,joy,joy
+11,5.0,Giftcard,POSITIVE,trust,anticipation
+12,5.0,Simple giftcard!,POSITIVE,joy,anticipation
+13,5.0,Great giftcard,POSITIVE,joy,anticipation
+14,5.0,Easy..,POSITIVE,joy,anticipation
+15,1.0,One Star,NEGATIVE,anger,anticipation
+16,5.0,Great Product.,POSITIVE,joy,anticipation
+17,5.0,No note attached to sent gift card,NEGATIVE,anger,anticipation
+18,5.0,Gift card,POSITIVE,joy,anticipation
+19,5.0,Good,POSITIVE,joy,anticipation
+20,5.0,Good Product,POSITIVE,joy,anticipation
+21,5.0,Good Product,POSITIVE,joy,anticipation
+22,5.0,Good Product,POSITIVE,joy,anticipation
+23,5.0,Good Product,POSITIVE,joy,anticipation
+24,5.0,Good Product,POSITIVE,joy,anticipation
+25,5.0,Good product,POSITIVE,trust,anticipation
+26,5.0,Good product,POSITIVE,joy,anticipation
+27,5.0,Good Product,POSITIVE,joy,anticipation
+28,5.0,Good Product,POSITIVE,joy,anticipation
+29,5.0,Good,POSITIVE,joy,anticipation
+30,5.0,Gift card,POSITIVE,joy,anticipation
+31,5.0,So easy,POSITIVE,joy,none
+32,2.0,Mistake,NEGATIVE,anger,sadness
+33,5.0,Great gift idea,POSITIVE,joy,anticipation
+34,5.0,Secure,POSITIVE,joy,none
+35,5.0,Birthday surprise!,POSITIVE,joy,joy
+36,5.0,Birthday Gift,POSITIVE,joy,anticipation
+37,5.0,Fun,POSITIVE,joy,anticipation
+38,5.0,Reload is super easy.,POSITIVE,anticipation,anticipation
+39,5.0,Convenience of giftabiliy.,POSITIVE,joy,anticipation
+40,5.0,Great Gift Package,POSITIVE,joy,anticipation
+41,5.0,Grest Sandwitches !!,POSITIVE,joy,anticipation
+42,5.0,GOOD PIZZA !!,POSITIVE,joy,anticipation
+43,5.0,We like this Store and they stock Tons of different Items for all kinds of Pets,POSITIVE,joy,anticipation
+44,5.0,Money was loaded on card,POSITIVE,joy,anger
+45,5.0,👍,POSITIVE,joy,none
+46,5.0,Love it!!,POSITIVE,joy,joy
+47,5.0,Five Stars,POSITIVE,joy,anger
+48,5.0,So cool you can get a free tin with the gift ...,POSITIVE,joy,joy
+49,5.0,Reccomend,POSITIVE,joy,none
+50,5.0,Little sister surprise,POSITIVE,anticipation,anticipation
+51,1.0,"The added value was great, but no more",NEGATIVE,disgust,anticipation
+52,4.0,Perfect gift!,POSITIVE,joy,joy
+53,4.0,Great staff appreciation gift!,POSITIVE,joy,joy
+54,5.0,Cute cute cute!,POSITIVE,joy,joy
+55,5.0,Five Stars,POSITIVE,joy,none
+56,5.0,As described.,POSITIVE,joy,anticipation
+57,5.0,Perfect gift for any occasion. Let them pick out what they love!,POSITIVE,joy,joy
+58,5.0,12 year old daughter loved this gift!,POSITIVE,joy,joy
+59,5.0,Easy to send to an Amazon shopper,POSITIVE,joy,anticipation
+60,5.0,Rec'd promo from Amazon when reloading gift card.,POSITIVE,joy,anticipation
+61,5.0,Saves a Little Over time.,POSITIVE,joy,anticipation
+62,5.0,What a great company,POSITIVE,joy,anticipation
+63,1.0,A problem to use at drive thru's,NEGATIVE,anger,trust
+64,5.0,A gift card does make a great gift for a tweenager.,POSITIVE,joy,joy
+65,5.0,Nice to have,POSITIVE,joy,disgust
+66,5.0,Excellent Gift,POSITIVE,joy,joy
+67,5.0,Yay so easy!,POSITIVE,joy,none
+68,5.0,:),POSITIVE,joy,none
+69,5.0,10/10,POSITIVE,joy,none
+70,5.0,Perfect for a birthday 🎂,POSITIVE,joy,anticipation
+71,5.0,Perfect!,POSITIVE,joy,anticipation
+72,5.0,Gift box nice!,POSITIVE,joy,joy
+73,5.0,It was soooo easy,POSITIVE,joy,anticipation
+74,5.0,great,POSITIVE,joy,none
+75,5.0,Amazon Thinks of Everything!,POSITIVE,joy,anticipation
+76,5.0,Amazon lover giftee?  Buy it!,POSITIVE,joy,joy
+77,5.0,Timing,POSITIVE,joy,none
+78,5.0,Was easy to do,POSITIVE,joy,none
+79,5.0,PENGUINS,POSITIVE,joy,none
+80,5.0,Believe this is the best gift to give !,POSITIVE,joy,anticipation
+81,5.0,convenient,POSITIVE,joy,anticipation
+82,5.0,Five Stars,POSITIVE,joy,anticipation
+83,5.0,Best gift for someone you don’t know what to get,POSITIVE,joy,anticipation
+84,5.0,Great value,POSITIVE,joy,anticipation
+85,5.0,Sweet gift!,POSITIVE,joy,anticipation
+86,5.0,Amazing,POSITIVE,joy,none
+87,5.0,Great Holder,POSITIVE,joy,anticipation
+88,5.0,Gift card,POSITIVE,joy,anticipation
+89,5.0,Starbuck gift card,POSITIVE,joy,joy
+90,5.0,Good litte thank-you gifts,POSITIVE,joy,anticipation
+91,3.0,Okay as a gift,NEGATIVE,sadness,anticipation
+92,5.0,Good gift,POSITIVE,trust,joy
+93,5.0,So convenient.,POSITIVE,joy,anticipation
+94,5.0,Just what was ordered.,POSITIVE,joy,anticipation
+95,5.0,Can Do It From Home,POSITIVE,joy,anticipation
+96,5.0,Love it!,POSITIVE,joy,joy
+97,5.0,Easy to use,POSITIVE,trust,none
+98,3.0,Easy to use,POSITIVE,joy,none
+99,5.0,Perfect gift sent I a lovely container,POSITIVE,joy,anticipation

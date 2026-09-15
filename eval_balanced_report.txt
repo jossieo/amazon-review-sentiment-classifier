@@ -1,0 +1,40 @@
+==============================================================
+STEP 6 — THREE-CLASS BALANCED RUN (150 reviews; 50 per class, seed=42)
+==============================================================
+Truth counts in sample     : POS 50  NEU 50  NEG 50
+Unparseable predictions    : 0
+
+Confusion matrix  (rows = truth, cols = model's call):
+truth \ pred        POS      NEU      NEG
+POS             48       1       1
+NEU              5      16      29
+NEG              1       1      48
+
+Overall accuracy           : 74.7%  (112/150)
+Macro F1 (mean of 3)       : 0.715
+Majority baseline (in run) : 33.3%
+
+Per-class (precision / recall / F1):
+  POS  n= 50  precision= 88.9%  recall= 96.0%  F1=0.923
+  NEU  n= 50  precision= 88.9%  recall= 32.0%  F1=0.471
+  NEG  n= 50  precision= 61.5%  recall= 96.0%  F1=0.750
+
+THE NEUTRAL (3-star) QUESTION:
+  True-NEUTRAL reviews collapsed into POSITIVE: 5
+  True-NEUTRAL reviews collapsed into NEGATIVE: 29
+  True-NEUTRAL reviews kept as NEUTRAL         : 16
+  Largest misclassifications:
+    NEU->NEG   x 29
+    NEU->POS   x 5
+    POS->NEU   x 1
+    POS->NEG   x 1
+
+Example 3-star reviews — did the model keep them NEUTRAL?
+  # 51 pred=NEG | rating=3  'Changing the price to what I wanted, disappointed'
+  # 52 pred=NEU | rating=3  'Three Stars'
+  # 53 pred=NEG | rating=3  'Hold out until pandemic in the past to eat here.'
+  # 54 pred=NEU | rating=3  'Would be 5 stars without activation fee'
+  # 55 pred=NEG | rating=3  'Food Stains?'
+  # 56 pred=NEG | rating=3  'Arrived quickly (the next day) but I gave it 3 ...'
+  # 57 pred=NEG | rating=3  'Bad Experience'
+  # 58 pred=NEG | rating=3  'The envelope is ripped'

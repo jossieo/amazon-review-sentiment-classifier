@@ -1,0 +1,29 @@
+======================================================================
+SCORING REPORT — first batch vs. ground truth (rating>=4 -> POS)
+======================================================================
+Reviews in batch            : 100
+Ground truth: POSITIVE      : 93  (93.0%)
+              NEGATIVE      : 7  (7.0%)
+Undefined/UNKNOWN preds     : 0
+Model agrees with rating    : 98/100 = 98.0%  (overall)
+Disagreements (model wrong) : 2
+
+Contingency (predict vs truth), UNKNOWN=treated as incorrect:
+                     truth=POS  truth=NEG
+  predict=POS             92           1
+  predict=NEG              1           6
+
+Per-class agreement (defined predictions only; UNKNOWN excluded):
+  POSITIVE class  n= 93  precision= 98.9%  recall= 98.9%  F1=0.989
+  NEGATIVE class  n=  7  precision= 85.7%  recall= 85.7%  F1=0.857
+  (macro F1 over the 100 defined predictions: 0.923)
+
+REVIEWS THE MODEL GOT WRONG (incl. UNKNOWN):
+  row#17  rating=5.0 (truth=POS)  model=NEG
+       title: 'No note attached to sent gift card'
+       model raw: 'NEGATIVE'
+  row#98  rating=3.0 (truth=NEG)  model=POS
+       title: 'Easy to use'
+       model raw: 'POSITIVE'
+
+NOTE: model never saw the rating; ground truth derived only after inference.

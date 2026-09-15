@@ -1,0 +1,14 @@
+# Large re-downloadable data (see README for the source) — not committed
+Gift_Cards.jsonl.gz
+data/nrc/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# macOS
+.DS_Store
+
+# Personal notes (not part of the deliverable)
+IDEA.md

@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en" data-mode="light" data-accent="oxblood">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentiment Classifier · Balanced 3-Class Results</title>
+<style>
+/* =====================================================================
+   THEME TOKENS — every color on the page resolves to a variable here.
+   A host recolors the whole product in one place (or via the controls,
+   which rewrite these variables at runtime).
+   ===================================================================== */
+:root{
+  --font-ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font-display:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --radius:16px;--radius-sm:10px;
+  --shadow:0 1px 2px rgba(20,15,10,.05),0 18px 40px -26px rgba(20,15,10,.35);
+  /* light */
+  --bg:#f5f2ec;--surface:#fffdf9;--surface-2:#efece3;
+  --ink:#221f1a;--ink-muted:#6f685c;--ink-faint:#9a9281;
+  --hairline:#e6e1d3;--hairline-strong:#d3ccba;
+  --accent:#a4362c;--accent-ink:#fffdf9;
+  --pos:#1e7d4f;--neu:#a87d24;--neg:#c03b2f;
+}
+:root[data-mode="dark"]{
+  --bg:#131110;--surface:#1d1a17;--surface-2:#282420;
+  --ink:#ece7dc;--ink-muted:#a79f90;--ink-faint:#716b5f;
+  --hairline:#373229;--hairline-strong:#463f33;
+  --accent-ink:#131110;
+  --pos:#46b67e;--neu:#d0a24d;--neg:#e0695c;
+}
+:root{--accent-soft:color-mix(in oklab,var(--accent) 11%,var(--surface));
+  --pos-soft:color-mix(in oklab,var(--pos) 14%,var(--surface));
+  --neu-soft:color-mix(in oklab,var(--neu) 14%,var(--surface));
+  --neg-soft:color-mix(in oklab,var(--neg) 14%,var(--surface));
+  --accent-line:color-mix(in oklab,var(--accent) 45%,transparent);}
+:root[data-accent="teal"]{--accent:#107c71}
+:root[data-accent="indigo"]{--accent:#5056c4}
+:root[data-accent="gold"]{--accent:#a06c1f}
+:root[data-mode="dark"][data-accent="oxblood"]{--accent:#e0756a}
+:root[data-mode="dark"][data-accent="teal"]{--accent:#2fb3a4}
+:root[data-mode="dark"][data-accent="indigo"]{--accent:#8b90ea}
+:root[data-mode="dark"][data-accent="gold"]{--accent:#d3a44f}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--font-ui);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;font-size:15.5px;
+  background:radial-gradient(1200px 480px at 85% -10%, var(--accent-soft), transparent 60%), var(--bg);}
+.wrap{max-width:1120px;margin:0 auto;padding:48px 28px 72px}
+
+.masthead{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap;padding-bottom:8px}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:650}
+h1{font-family:var(--font-display);font-weight:600;font-size:clamp(30px,4.4vw,46px);line-height:1.05;margin:10px 0 6px;letter-spacing:-.01em}
+.lede{color:var(--ink-muted);max-width:66ch;margin:0}
+.lede em{color:var(--ink);font-style:normal;font-weight:550}
+
+.controls{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.seg{display:inline-flex;background:var(--surface-2);border:1px solid var(--hairline);border-radius:999px;padding:3px}
+.seg button{border:0;background:transparent;color:var(--ink-muted);font:inherit;font-size:13px;padding:5px 14px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.swatches{display:inline-flex;gap:7px;align-items:center;padding:0 8px;height:30px;background:var(--surface-2);border:1px solid var(--hairline);border-radius:999px}
+.swatches button{width:16px;height:16px;border-radius:50%;border:2px solid var(--surface-2);cursor:pointer;padding:0;box-shadow:0 0 0 1px var(--hairline)}
+.swatches button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--accent)}
+
+.hero{margin:26px 0 30px;padding:26px 28px;border:1px solid var(--hairline);border-left:3px solid var(--accent);border-radius:var(--radius-sm);background:var(--surface);box-shadow:var(--shadow)}
+.hero p{margin:0;font-size:clamp(16px,2vw,19px);color:var(--ink-muted);max-width:90ch}
+.hero strong{color:var(--ink);font-weight:650}
+
+section{margin-top:46px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.sec-title{font-family:var(--font-display);font-size:22px;font-weight:600;margin:0}
+.sec-note{color:var(--ink-faint);font-size:13px}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kpi{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:2px}
+.kpi-hero{border-color:var(--accent-line)}
+.kpi-label{font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-faint);font-weight:650}
+.kpi-value{font-family:var(--font-display);font-size:44px;line-height:1;font-weight:650;color:var(--accent)}
+.kpi-med{font-size:34px}
+.kpi-sub{font-size:13px;color:var(--ink-muted);margin-top:6px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:baseline}
+.dot-pos{background:var(--pos)}.dot-neu{background:var(--neu)}.dot-neg{background:var(--neg)}
+
+.panel{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow)}
+.panel h3{margin:0 0 10px;font-family:var(--font-display);font-weight:600;font-size:18px}
+p.helper{margin:0;color:var(--ink-muted);font-size:13.5px}
+.two{display:grid;grid-template-columns:1.35fr 1fr;gap:18px;align-items:stretch}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
+
+/* stars distribution */
+.stars-wrap{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.star-row{display:grid;grid-template-columns:34px 1fr 34px;gap:10px;align-items:center}
+.star-r{font-size:13px;color:var(--ink-muted);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.star-track{height:16px;background:var(--surface-2);border:1px solid var(--hairline);border-radius:8px;overflow:hidden}
+.star-fill{display:block;height:100%;border-radius:8px}
+.star-fill.pos{background:var(--pos)}.star-fill.neu{background:var(--neu)}.star-fill.neg{background:var(--neg)}
+.star-n{font-size:13px;font-variant-numeric:tabular-nums;color:var(--ink)}
+
+/* real vs balanced imbalance */
+.imb{display:flex;flex-direction:column;gap:14px}
+.imb-row{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center;row-gap:4px}
+.imb-name{font-size:13px;color:var(--ink-muted);font-weight:600}
+.imb-bar{display:flex;height:22px;border-radius:6px;overflow:hidden;grid-column:2;border:1px solid var(--hairline);background:var(--surface-2)}
+.imb-bar>span{display:block;min-width:2px}
+.imb-pos{background:var(--pos)}.imb-neu{background:var(--neu)}.imb-neg{background:var(--neg)}
+.imb-nums{grid-column:2;font-size:12px;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+.honest{display:flex;gap:14px;align-items:flex-start;background:var(--surface-2);border:1px dashed var(--hairline-strong);border-radius:var(--radius-sm);padding:16px 18px;margin-top:18px}
+.honest .flag{font-size:22px;line-height:1}
+.honest p{margin:0;font-size:13.5px;color:var(--ink-muted)}
+.honest b{color:var(--ink)}
+
+/* confusion matrix (3x3) */
+.mx{display:flex;flex-direction:column;gap:7px;margin-top:6px}
+.mx-h{display:grid;grid-template-columns:96px 1fr 1fr 1fr;gap:8px;align-items:stretch}
+.mx-corner{font-size:11px;color:var(--ink-faint);line-height:1.45;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;padding-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.mx-corner b{display:block;font-size:12px;color:var(--ink-muted)}
+.mx-corner i{font-style:normal;font-weight:600}
+.mx-hcell{text-align:center;font-size:12px;color:var(--ink-muted);font-weight:650;background:var(--surface-2);border:1px solid var(--hairline);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;min-height:30px}
+.mx-row{display:grid;grid-template-columns:96px 1fr 1fr 1fr;gap:8px}
+.mx-rlabel{font-size:12.5px;color:var(--ink-muted);display:flex;align-items:center;line-height:1.2}
+.mx-cell{min-height:92px;border-radius:var(--radius-sm);display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid var(--hairline);padding:8px}
+.mx-count{font-family:var(--font-display);font-size:28px;font-weight:650;line-height:1}
+.mx-lb{font-size:10.5px;color:var(--ink-muted);opacity:.9;margin-top:3px;font-style:italic;text-align:center}
+.cell-hit{background:var(--pos-soft);color:var(--pos);border-color:color-mix(in oklab,var(--pos) 30%,transparent)}
+.cell-fp{background:var(--neg-soft);color:var(--neg);border-color:color-mix(in oklab,var(--neg) 30%,transparent)}
+.cell-blank{background:var(--surface-2);color:var(--ink-faint)}
+.mx-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;font-size:12.5px;color:var(--ink-muted)}
+.lg{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sw-hit{background:var(--pos-soft);box-shadow:inset 0 0 0 1px color-mix(in oklab,var(--pos) 40%,transparent)}
+.sw-fp{background:var(--neg-soft);box-shadow:inset 0 0 0 1px color-mix(in oklab,var(--neg) 40%,transparent)}
+.sw-pos{background:var(--pos)}.sw-neu{background:var(--neu)}.sw-neg{background:var(--neg)}
+
+/* correct answer vs predicted (stacked per truth class) */
+.cmp{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+.cmp-row{display:grid;grid-template-columns:84px 1fr;gap:12px;align-items:center}
+.cmp-lb{font-size:13px;color:var(--ink-muted);font-weight:600}
+.cmp-bar{display:flex;height:30px;border-radius:7px;overflow:hidden;border:1px solid var(--hairline);background:var(--surface-2)}
+.cmp-seg{display:block;min-width:4px}
+.seg-pos{background:var(--pos)}.seg-neu{background:var(--neu)}.seg-neg{background:var(--neg)}
+.seg-blank{background:var(--surface-2)}
+.cmp-counts{margin-top:5px;font-size:12.5px;color:var(--ink-muted);font-variant-numeric:tabular-nums}
+.cmp-counts .cc-pos{color:var(--pos);font-weight:650}.cmp-counts .cc-neu{color:var(--neu);font-weight:650}.cmp-counts .cc-neg{color:var(--neg);font-weight:650}
+.cmp-legend{display:flex;gap:12px;margin-top:10px;font-size:12.5px;color:var(--ink-muted);flex-wrap:wrap}
+
+/* per-class recall */
+.pc{display:flex;flex-direction:column;gap:22px}
+.pc-row{display:flex;flex-direction:column;gap:6px}
+.pc-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.pc-name{font-weight:650;display:inline-flex;align-items:center}
+.pc-nums{font-size:13px;color:var(--ink-muted);font-variant-numeric:tabular-nums}
+.pc-bar{height:16px;background:var(--surface-2);border-radius:8px;overflow:hidden;border:1px solid var(--hairline)}
+.pc-fill{display:block;height:100%;border-radius:8px}
+.pc-pos{background:var(--pos)}.pc-neu{background:var(--neu)}.pc-neg{background:var(--neg)}
+.pc-sub{font-size:12.5px;color:var(--ink-faint)}
+
+/* emotions */
+.emo-wrap{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.emo{display:inline-flex;align-items:center;gap:7px;background:var(--surface-2);border:1px solid var(--hairline);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--ink-muted)}
+.emo-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block}
+.emo b{color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* 3-star problem / wrong reviews */
+.wrong-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.w-card{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+.w-top{display:flex;justify-content:space-between;align-items:center}
+.w-tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.w-tag.coll{background:var(--neg-soft);color:var(--neg)}
+.w-tag.fp{background:var(--accent-soft);color:var(--accent)}
+.w-row{font-size:12.5px;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+.w-title{margin:0;font-family:var(--font-display);font-size:17px;font-weight:600}
+.w-vs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.w-slot{background:var(--surface-2);border:1px solid var(--hairline);border-radius:var(--radius-sm);padding:8px 12px}
+.w-lb{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint)}
+.w-val{font-weight:650;font-size:14px}
+.w-text{margin:0;font-size:13.5px;color:var(--ink-muted);border-top:1px dashed var(--hairline);padding-top:10px}
+.w-note{font-size:13px;color:var(--ink-muted);background:var(--surface-2);border-radius:var(--radius-sm);padding:12px 16px;margin:0}
+.w-note b{color:var(--ink)}
+
+/* review table */
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--hairline-strong);background:var(--surface);color:var(--ink-muted);font:inherit;font-size:13px;padding:6px 13px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.search{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--hairline-strong);border-radius:10px;padding:7px 12px;min-width:220px}
+.search input{border:0;background:transparent;color:var(--ink);font:inherit;font-size:13.5px;outline:none;width:100%}
+.search input::placeholder{color:var(--ink-faint)}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{text-align:left;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);font-weight:650;padding:8px 12px;border-bottom:1px solid var(--hairline-strong);cursor:pointer;user-select:none;white-space:nowrap}
+.tbl td{padding:10px 12px;border-bottom:1px solid var(--hairline);font-size:13.5px;vertical-align:top}
+.tbl tbody tr{cursor:pointer}
+.tbl tbody tr:hover{background:var(--surface-2)}
+.stars{color:var(--ink-faint);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.05em;padding:2px 9px;border-radius:999px;text-transform:uppercase;white-space:nowrap}
+.pill.pos{background:var(--pos-soft);color:var(--pos)}
+.pill.neu{background:var(--neu-soft);color:var(--neu)}
+.pill.neg{background:var(--neg-soft);color:var(--neg)}
+.pill.ok{background:var(--pos-soft);color:var(--pos)}
+.pill.wrong{background:var(--accent-soft);color:var(--accent)}
+.rdetail{color:var(--ink-muted);font-size:13px}
+.rdetail code{background:var(--surface-2);padding:1px 6px;border-radius:6px;font-size:12px;color:var(--ink-muted)}
+.tbl-foot{font-size:13px;color:var(--ink-muted);margin-top:12px;font-variant-numeric:tabular-nums}
+
+.foot{margin-top:60px;padding-top:22px;border-top:1px solid var(--hairline);color:var(--ink-faint);font-size:13px;display:flex;flex-direction:column;gap:4px}
+.foot b{color:var(--ink-muted);font-weight:600}
+
+@media (max-width:900px){
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .two,.pair{grid-template-columns:1fr}
+  .controls{align-items:flex-start}
+}
+@media (max-width:520px){ .kpis{grid-template-columns:1fr} .wrap{padding:34px 18px 56px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <div class="eyebrow">Amazon 2023 · Gift Cards · Balanced 3-class run · seed 42</div>
+      <h1>Sentiment Classifier —<br>Results</h1>
+      <p class="lede">A balanced sample of <em>150 reviews</em> (50 per class) was scored by an LLM (DeepSeek-V4-Flash via an OpenAI-compatible endpoint) on <em>title and text only</em>. Classes: <em>4–5★ POSITIVE</em>, <em>3★ NEUTRAL</em>, <em>1–2★ NEGATIVE</em>. The star rating is used only afterwards to check the model.</p>
+    </div>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Color mode">
+        <button type="button" data-mode-btn="light" aria-pressed="false">Light</button>
+        <button type="button" data-mode-btn="dark" aria-pressed="false">Dark</button>
+      </div>
+      <div class="swatches" role="group" aria-label="Accent color">
+        <button type="button" aria-label="Oxblood" data-accent="oxblood" style="background:#a4362c"></button>
+        <button type="button" aria-label="Teal" data-accent="teal" style="background:#107c71"></button>
+        <button type="button" aria-label="Indigo" data-accent="indigo" style="background:#5056c4"></button>
+        <button type="button" aria-label="Gold" data-accent="gold" style="background:#a06c1f"></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="hero">
+    <p>@@HEADLINE@@<br><span style="color:var(--ink-muted)">The rating is the referee: 4–5★ = positive, 3★ = neutral, 1–2★ = negative — but the model never sees it.</span></p>
+  </div>
+
+  <section>
+    <div class="kpis">@@KPI@@</div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">The data, honestly</h2>
+      <span class="sec-note">why a balanced sample matters</span>
+    </div>
+    <div class="pair">
+      <div class="panel">
+        <h3>Star ratings in this run</h3>
+        <p class="helper">Balanced by class, so each bar here is ~50 — the rare 3★ gets heard.</p>
+        @@STARS@@
+      </div>
+      <div class="panel">
+        <h3>Real data vs. the balanced sample</h3>
+        <p class="helper">In the real dataset most reviews are ★★★★★; the balanced sample equalises it so no class is sold short.</p>
+        @@IMBALANCE@@
+        <div class="honest">
+          <span class="flag">⚖️</span>
+          <p><b>The honest check.</b> On this balanced 3-way set, a model that just guessed the most common class would score <b>@@BASELINE@@</b>. The model scores <b>@@ACC@@</b> — and the gap between those is where the real work lives.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">Where it agrees — and where it slips</h2>
+      <span class="sec-note">the 3×3 outcomes and how each class is read</span>
+    </div>
+    <div class="two">
+      <div class="panel">
+        <h3>Agreement, class by class</h3>
+        <p class="helper">Rows are the rating's answer; columns are what the model said. Green = matched.</p>
+        @@MATRIX@@
+      </div>
+      <div class="panel">
+        <h3>Correct answer vs. predicted</h3>
+        <p class="helper">For each true class, how the model split it. Watch the NEUTRAL row bleed into NEGATIVE.</p>
+        @@COMPARE@@
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2 class="sec-title">How often each class is answered right</h2>
+      <span class="sec-note">recall per class — macro-F1 = <b>@@MACRO@@</b></span></div>
+    <div class="panel">@@RECALL@@</div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">The 3-star problem</h2>
+      <span class="sec-note">what the lopsided run hid</span>
+    </div>
+    @@WRONG@@
+  </section>
+
+  <section>
+    <div class="sec-head"><h2 class="sec-title">Primary emotion (LLM) in this run</h2>
+      <span class="sec-note">the emotion the model attached to each review</span></div>
+    <div class="panel">@@EMOTION@@</div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2 class="sec-title">Every review, checkable</h2>
+      <span class="sec-note">filter, search, sort — click a row for the full text the model judged</span>
+    </div>
+    <div class="toolbar">
+      <div class="chips" id="chips">
+        <button type="button" class="chip" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" class="chip" data-filter="ok" aria-pressed="false">Matched rating</button>
+        <button type="button" class="chip" data-filter="wrong" aria-pressed="false">Wrong</button>
+        <button type="button" class="chip" data-filter="POS" aria-pressed="false">Rating positive</button>
+        <button type="button" class="chip" data-filter="NEU" aria-pressed="false">Rating neutral</button>
+        <button type="button" class="chip" data-filter="NEG" aria-pressed="false">Rating negative</button>
+      </div>
+      <div class="search"><input id="q" type="search" placeholder="Search title, text, asin…" aria-label="Search reviews"></div>
+    </div>
+    <div class="panel" style="overflow-x:auto">
+      <table class="tbl">
+        <thead><tr>
+          <th class="sortable" data-key="idx">#</th>
+          <th class="sortable" data-key="rating">Rating</th>
+          <th>Title</th>
+          <th class="sortable" data-key="truth">Rating says</th>
+          <th class="sortable" data-key="pred">Model said</th>
+          <th class="sortable" data-key="emotion">Emotion</th>
+          <th class="sortable" data-key="correct">Outcome</th>
+        </tr></thead>
+        <tbody id="tbody"><tr><td colspan="7" style="color:var(--ink-faint)">Loading…</td></tr></tbody>
+      </table>
+    </div>
+    <div class="tbl-foot" id="tbl-foot"></div>
+  </section>
+
+  <footer class="foot">
+    <span><b>Model:</b> DeepSeek-V4-Flash-0731 via http://dobolyi.com:9000/v1 (OpenAI-compatible) · reply exactly <code>SENTIMENT|EMOTION</code> from title &amp; text; rating withheld</span>
+    <span><b>Ground truth (check only):</b> rating 4–5 → POSITIVE, 3 → NEUTRAL, 1–2 → NEGATIVE.</span>
+    <span><b>Balanced sample:</b> 50 per class drawn from all 152,410 Gift Cards reviews with <code>random.seed(42)</code> → deterministic. Real-world split: POS 88.5% · NEU 2.1% · NEG 9.3%.</span>
+    <span><b>Metrics:</b> macro-F1 = mean of the three classes' F1.</span>
+    <span><b>Data:</b> Amazon Reviews '23, Gift Cards category (McAuley Lab, UC San Diego) — <a href="https://amazon-reviews-2023.github.io" style="color:var(--accent)">amazon-reviews-2023.github.io</a>.</span>
+    <span>Generated from <code>predictions_balanced.csv</code> + <code>data/balanced_150.jsonl</code> — every figure computed, none hand-typed.</span>
+  </footer>
+</div>
+
+<script type="application/json" id="rows-data">@@ROWS@@</script>
+<script>
+(function(){
+  var ROWS = JSON.parse(document.getElementById("rows-data").textContent);
+
+  /* theme */
+  function applyTheme(){
+    document.documentElement.setAttribute("data-mode", localStorage.getItem("dkmode") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+    var acc = localStorage.getItem("dkaccent") || "oxblood";
+    document.documentElement.setAttribute("data-accent", acc);
+    document.querySelectorAll("[data-mode-btn]").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-mode-btn"))===document.documentElement.getAttribute("data-mode")); });
+    document.querySelectorAll(".swatches [data-accent]").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-accent"))===acc); });
+  }
+  document.querySelectorAll("[data-mode-btn]").forEach(function(b){ b.onclick=function(){ localStorage.setItem("dkmode", b.getAttribute("data-mode-btn")); applyTheme(); }; });
+  document.querySelectorAll(".swatches [data-accent]").forEach(function(b){ b.onclick=function(){ localStorage.setItem("dkaccent", b.getAttribute("data-accent")); applyTheme(); }; });
+  applyTheme();
+
+  /* review table */
+  var tbody = document.getElementById("tbody"), foot = document.getElementById("tbl-foot");
+  var state = { filter:"all", q:"", sort:"idx", dir:1 };
+
+  function stars(r){ var s=Math.round(r); s=Math.max(1,Math.min(5,s)); var full="★".repeat(s), rest="☆".repeat(5-s); return full+rest; }
+  function esc(s){ return (s||"").replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+
+  function matches(r){
+    if(state.filter==="ok"){ if(!r.correct) return false; }
+    else if(state.filter==="wrong"){ if(r.correct) return false; }
+    else if(state.filter==="POS"||state.filter==="NEU"||state.filter==="NEG"){ if(r.truth!==state.filter) return false; }
+    if(state.q){ var h=(r.title+" "+(r.text||"")+" "+(r.asin||"")).toLowerCase(); if(h.indexOf(state.q.toLowerCase())===-1) return false; }
+    return true;
+  }
+
+  function render(){
+    var list = ROWS.filter(matches).slice();
+    list.sort(function(a,b){ var x=a[state.sort], y=b[state.sort];
+      if(typeof x==="string"){ x=x.toLowerCase(); y=y.toLowerCase(); }
+      if(x<y) return -1*state.dir; if(x>y) return 1*state.dir; return 0; });
+    tbody.innerHTML="";
+    list.forEach(function(r){
+      var tr=document.createElement("tr");
+      tr.innerHTML =
+        "<td class='stars'>"+esc(r.idx+1)+"</td>"+
+        "<td class='stars'>"+stars(r.rating)+"</td>"+
+        "<td><div>"+esc(r.title||"<em style='color:var(--ink-faint)'>no title</em>")+"</div>"+
+          "<div class='rdetail'><code>"+esc(r.asin||"")+"</code></div></td>"+
+        "<td><span class='pill "+r.truth.toLowerCase()+"'>"+r.truth+"</span></td>"+
+        "<td><span class='pill "+r.pred.toLowerCase()+"'>"+r.pred+"</span></td>"+
+        "<td class='rdetail'>"+esc(r.emotion||"—")+"</td>"+
+        "<td><span class='pill "+(r.correct?"ok":"wrong")+"'>"+(r.correct?"Matched":"Wrong")+"</span></td>";
+      var det=document.createElement("tr"); det.className="rdetail"; det.style.display="none";
+      det.innerHTML="<td colspan='7' style='padding-left:24px'><b style='color:var(--ink)'>Review text the model judged:</b><br>"+esc(r.text||"(no text)")+"</td>";
+      tr.addEventListener("click", function(){ det.style.display=(det.style.display==="none")?"table-row":"none"; });
+      tbody.appendChild(tr); tbody.appendChild(det);
+    });
+    foot.textContent="Showing "+list.length+" of "+ROWS.length+" reviews"+(state.filter!=="all"||state.q?" (filtered)":".")+"   —   matched "+ROWS.filter(function(r){return r.correct;}).length+" · wrong "+ROWS.filter(function(r){return !r.correct;}).length;
+  }
+
+  document.querySelectorAll(".chip").forEach(function(c){ c.onclick=function(){ document.querySelectorAll(".chip").forEach(function(x){ x.setAttribute("aria-pressed","false"); }); c.setAttribute("aria-pressed","true"); state.filter=c.getAttribute("data-filter"); render(); }; });
+  document.getElementById("q").addEventListener("input", function(){ state.q=this.value; render(); });
+  document.querySelectorAll("th.sortable").forEach(function(th){ th.onclick=function(){ var k=th.getAttribute("data-key"); if(state.sort===k){state.dir*=-1;} else {state.sort=k;state.dir=1;} render(); }; });
+  render();
+})();
+</script>
+</body>
+</html>

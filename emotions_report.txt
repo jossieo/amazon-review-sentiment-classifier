@@ -1,0 +1,45 @@
+==================================================================
+STEP 5 — PRIMARY-EMOTION COMPARISON: LLM vs NRC word list (100 reviews)
+==================================================================
+LLM parse failures/unknown    : 0
+NRC no-emotion-word reviews  : 15
+Exact agree on emotion (all) : 21/100 = 21.0%
+Exact agree (both defined)   : 21/85 = 24.7%
+  (restricts to the 85 reviews where both predicted a real emotion)
+
+Emotion distribution (reviews):
+                   LLM   NRC
+  anger              5     2
+  anticipation       2    59
+  disgust            1     1
+  fear               0     0
+  joy               87    21
+  sadness            1     1
+  surprise           0     0
+  trust              4     1
+  (none/unk)         0    15
+
+Top LLM-vs-NRC disagreements (LLM said X, NRC said Y):
+  joy          vs anticipation : 51
+  trust        vs anticipation :  2
+  anger        vs anticipation :  2
+  joy          vs anger        :  2
+  anger        vs joy          :  1
+  anger        vs sadness      :  1
+  disgust      vs anticipation :  1
+  anger        vs trust        :  1
+  joy          vs disgust      :  1
+  sadness      vs anticipation :  1
+  trust        vs joy          :  1
+
+Disagreement examples (LLM | NRC | title):
+  #  1 joy          | anticipation | 'Great gift'
+  #  4 joy          | anticipation | 'Nice looking'
+  #  5 anger        | joy          | 'Not $10 Gift Cards'
+  #  7 joy          | anticipation | 'Easy gift'
+  #  8 joy          | anticipation | 'Great gift'
+  # 10 joy          | anticipation | 'Great for saying “thank you” to the mail person, farrie'
+  # 12 trust        | anticipation | 'Giftcard'
+  # 13 joy          | anticipation | 'Simple giftcard!'
+  # 14 joy          | anticipation | 'Great giftcard'
+  # 15 joy          | anticipation | 'Easy..'
