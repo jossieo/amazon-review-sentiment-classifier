@@ -353,16 +353,26 @@ p.helper{margin:0;color:var(--ink-muted);font-size:13.5px}
 (function(){
   var ROWS = JSON.parse(document.getElementById("rows-data").textContent);
 
+  /* Storage that cannot throw — some origins (e.g. file:// in Chrome) block
+     localStorage with a SecurityError. Fall back to an in-memory store so the
+     whole page keeps working (theme + filters + table) whatever the origin. */
+  var store = (function(){
+    try { var s = window.localStorage, t = "__hermes_probe__"; s.setItem(t, "1"); s.removeItem(t); return s; }
+    catch (e) { var m = {}; return { getItem:function(k){ return k in m ? m[k] : null; },
+                                     setItem:function(k,v){ m[k] = ""+v; },
+                                     removeItem:function(k){ delete m[k]; } }; }
+  })();
+
   /* theme */
   function applyTheme(){
-    document.documentElement.setAttribute("data-mode", localStorage.getItem("dkmode") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
-    var acc = localStorage.getItem("dkaccent") || "oxblood";
+    document.documentElement.setAttribute("data-mode", store.getItem("dkmode") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+    var acc = store.getItem("dkaccent") || "oxblood";
     document.documentElement.setAttribute("data-accent", acc);
     document.querySelectorAll("[data-mode-btn]").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-mode-btn"))===document.documentElement.getAttribute("data-mode")); });
     document.querySelectorAll(".swatches [data-accent]").forEach(function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-accent"))===acc); });
   }
-  document.querySelectorAll("[data-mode-btn]").forEach(function(b){ b.onclick=function(){ localStorage.setItem("dkmode", b.getAttribute("data-mode-btn")); applyTheme(); }; });
-  document.querySelectorAll(".swatches [data-accent]").forEach(function(b){ b.onclick=function(){ localStorage.setItem("dkaccent", b.getAttribute("data-accent")); applyTheme(); }; });
+  document.querySelectorAll("[data-mode-btn]").forEach(function(b){ b.onclick=function(){ store.setItem("dkmode", b.getAttribute("data-mode-btn")); applyTheme(); }; });
+  document.querySelectorAll(".swatches [data-accent]").forEach(function(b){ b.onclick=function(){ store.setItem("dkaccent", b.getAttribute("data-accent")); applyTheme(); }; });
   applyTheme();
 
   /* review table */
@@ -370,7 +380,7 @@ p.helper{margin:0;color:var(--ink-muted);font-size:13.5px}
   var state = { filter:"all", q:"", sort:"idx", dir:1 };
 
   function stars(r){ var s=Math.round(r); s=Math.max(1,Math.min(5,s)); var full="★".repeat(s), rest="☆".repeat(5-s); return full+rest; }
-  function esc(s){ return (s||"").replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g,function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
 
   function matches(r){
     if(state.filter==="ok"){ if(!r.correct) return false; }
